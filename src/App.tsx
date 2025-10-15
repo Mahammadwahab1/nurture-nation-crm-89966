@@ -8,6 +8,9 @@ import Index from "./pages/Index";
 import Auth from "./pages/Auth";
 import AdminDashboard from "./pages/AdminDashboard";
 import CounselorDashboard from "./pages/CounselorDashboard";
+import AdminLeads from "./pages/AdminLeads";
+import CounselorLeads from "./pages/CounselorLeads";
+import LeadWorkspace from "./pages/LeadWorkspace";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -31,6 +34,14 @@ const App = () => (
               </ProtectedRoute>
             }
           />
+          <Route
+            path="/admin/leads"
+            element={
+              <ProtectedRoute requiredRole="admin">
+                <AdminLeads />
+              </ProtectedRoute>
+            }
+          />
           
           {/* Counselor Routes */}
           <Route
@@ -38,6 +49,24 @@ const App = () => (
             element={
               <ProtectedRoute requiredRole="counselor">
                 <CounselorDashboard />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/counselor/leads"
+            element={
+              <ProtectedRoute requiredRole="counselor">
+                <CounselorLeads />
+              </ProtectedRoute>
+            }
+          />
+          
+          {/* Shared Lead Workspace */}
+          <Route
+            path="/lead/:leadId"
+            element={
+              <ProtectedRoute>
+                <LeadWorkspace />
               </ProtectedRoute>
             }
           />
